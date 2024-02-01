@@ -3,6 +3,7 @@ const currentPlayer = document.querySelector(".currentPlayer");
 let selected;
 let player = "X";
 
+// Posições possíveis para vitória
 let positions = [
   [1,2,3],
   [4,5,6],
@@ -16,9 +17,10 @@ let positions = [
 
 function init(){
   selected = [];
-
+  // Atualiza o jogador atual
   currentPlayer.innerHTML = `JOGADOR DA VEZ: ${player}`;
 
+  // Ao clicar, chama a função de novo movimento
   document.querySelectorAll(".game button").forEach((item) => {
     item.innerHTML = "";
     item.addEventListener("click", newMove)
@@ -27,6 +29,7 @@ function init(){
 
 init();
 
+// Atribui ao lugar clicado, o X ou O dependendo do jogador atual
 function newMove(e){
   const index = e.target.getAttribute("data-i");
   e.target.innerHTML = player;
@@ -37,10 +40,12 @@ function newMove(e){
     check();
   },[100]);
 
+  // Intercala entre jogadores após uma jogada
   player = player === "X" ? "O" : "X";
   currentPlayer.innerHTML = `JOGADOR DA VEZ: ${player}`;
 }
 
+// Chega as posiç~eos atuais para ver se alguém ganhou ou se deu empate
 function check(){
   let playerLastMove = player === "X" ? "O" : "X";
 
